@@ -120,6 +120,8 @@ def add_page(request, category_name_slug):
     return render(request, 'rango/add_page.html',  context = context_dict)
 
 
+#login stuff withoud redux
+"""
 def register(request):
     registered = False
     #boolean of the state of the registration - will turn to True when reg process is successfully done
@@ -200,10 +202,6 @@ def user_login(request):
         return render(request, 'rango/login.html')
     
 
-@login_required
-def restricted(request):
-    return render(request, 'rango/restricted.html')
-
 
 @login_required
 def user_logout(request):
@@ -211,6 +209,14 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homepage.
     return redirect(reverse('rango:index'))
+"""
+
+
+@login_required
+def restricted(request):
+    return render(request, 'rango/restricted.html')
+
+
 
 
 def get_server_side_cookie(request, cookie, default_val =None):
