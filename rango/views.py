@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
 
+from rango.bing_search import run_query
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -267,3 +269,16 @@ def visitor_cookie_handler(request):
     
     #create a RESPONSE COOKIE with the maybe updated number of visits
     request.session['visits'] = visits
+
+
+
+def search(request):
+    result_list = []
+    query=""
+    
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = run_query(query)
+    
+    return render(request, 'rango/search.html', {'result_list': result_list, 'last_query': query})
